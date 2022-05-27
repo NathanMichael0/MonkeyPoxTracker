@@ -6,7 +6,6 @@ import { getLocationName } from "./utils";
 import './WorldMap.css'
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
 
 const baseUrl = "http://localhost:5000";
 
@@ -740,9 +739,8 @@ let idCodes = [{
 	"id": 716,
 	"name": "Zimbabwe"
 }];
-let countr = [];
+let countr = [{field5: 0}];
 let looksets = [];
-
 
 
 const projection = geoEqualEarth()
@@ -793,6 +791,7 @@ const WorldMap = () => {
 		countr = temp[1].slice();
 		//console.log("printtt", temp[0], "\n" , temp[1]);
 		
+		
 	
         setLoad(1);
 		console.log("here ",  countr)
@@ -807,6 +806,7 @@ const WorldMap = () => {
 
   const handleCountryClick = (countryIndex) => {
    // console.log("Clicked on country: ", geographies[countryIndex]);
+   setRegionalCases(0)
 	
    for(let i = 0; i<idCodes.length; i++ )
    {
@@ -853,6 +853,8 @@ const WorldMap = () => {
 		console.log("Clicked on Country: ", event)
 		
 		handleLocationMouseOver(event);
+		setCountryLook(listC.slice());
+	looksets = listC.slice();
 	}
 else{
 
@@ -861,8 +863,8 @@ else{
 
 }
 
-	setCountryLook(listC.slice());
-	looksets = listC.slice();
+	
+	handleLocationMouseMove();
 
 
   }
@@ -874,7 +876,7 @@ else{
 	setRegionalCases(0)
 
 
-
+	setCountryLook([{coordinates:[-1000,-1000]}]);
 	if(event.cityCases){
 		setPointedLocation(event.cityCases+", "+ event.clickedCountry)
 		setRegionalCases(event.cityCasesNum)
@@ -891,6 +893,7 @@ else{
 		{
 			if  ( typeof(event) === "number" && ((geographies[event].id) == (idCodes[i].id))){
 			  setPointedLocation(idCodes[i].name)
+			  
 			break;
 			}
 		}
@@ -921,6 +924,7 @@ else{
     <div>
      <section>
        <h1>World Monkey Pox cases</h1>
+	   <p> Total Cases world wide (Confirmed and suspected) : {countr[(countr.length) - 1]["field5"]}</p>
 
      <div class = "dopdown-content"> {poxData.map( e => ( 
        <div>  
