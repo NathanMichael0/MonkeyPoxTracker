@@ -21,12 +21,8 @@
 	color:rgb(74, 96, 222);
 }
 
-.imgLogo {
-	position: relative;
-	top: 0;
-	left: 0;
-	padding: 0px;
-	width: 50px;
+.centd {
+	position: center;
   }
 
   .nav-link {
@@ -51,10 +47,16 @@
 
 
 .tooltipdisp {
+        border-radius: 25px;
 				position: fixed;
 				width: 200px;
 				padding: 10px;
 				border: 1px solid darkgray;
-				background-color: white;
+        background-image: linear-gradient(to bottom right, red, yellow);
 			}
 	
+ #grad {
+        background-image: linear-gradient(to bottom right, red, yellow);
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: small;
+      }

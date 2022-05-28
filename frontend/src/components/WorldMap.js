@@ -7,7 +7,7 @@ import './WorldMap.css'
 import axios from "axios";
 
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "http://192.168.0.10:5000";
 
  let cities= [
   {
@@ -778,6 +778,8 @@ const WorldMap = () => {
     }
   , [])
 
+ 
+
   const handleMPUpdates = async () =>{
    
 
@@ -864,7 +866,7 @@ else{
 }
 
 	
-	handleLocationMouseMove();
+	handleLocationMouseMove(event);
 
 
   }
@@ -876,13 +878,14 @@ else{
 	setRegionalCases(0)
 
 
-	setCountryLook([{coordinates:[-1000,-1000]}]);
+	
 	if(event.cityCases){
 		setPointedLocation(event.cityCases+", "+ event.clickedCountry)
 		setRegionalCases(event.cityCasesNum)
 
 	}
 	else if(event["COUNTA of Country"]){
+		setCountryLook([{coordinates:[-1000,-1000]}]);
 		setPointedLocation(event["COUNTA of Country"])
 		setRegionalCases(Number(event["field5"]))
 	}
@@ -906,10 +909,17 @@ else{
 
   const  handleLocationMouseMove = event => {
     //console.log(event);
+
+	var e = window.event;
+
+    var posX = e.clientX;
+    var posY = e.clientY;
+
+	console.log("mousemoveX", (posX),"mousemoveY", (posY))
     setToolTipStyle({
       display: "block",
-      top: ( 0*7 + 160),
-      left:  ( 0*35  + 200)
+      top: (posY-165  ),
+      left:  ( posX- 35  )
     });
     
   }
@@ -921,24 +931,16 @@ else{
   
   return (
 
-    <div>
+    <div >
+	
+	 
      <section>
        <h1>World Monkey Pox cases</h1>
 	   <p> Total Cases world wide (Confirmed and suspected) : {countr[(countr.length) - 1]["field5"]}</p>
 
-     <div class = "dopdown-content"> {poxData.map( e => ( 
-       <div>  
-       
-		
-        
-       
-        </div>
-  
+ 
       
-        
-        ))} 
       
-      </div>
      
      </section>
 {
@@ -948,7 +950,7 @@ poxData.map((vl) => {
   {
 return(
 <div>
-<svg width={ 800 } height={ 450 } viewBox="0 0 800 450"  >
+<svg width={ 600 } height={ 400 } viewBox="0 0 800 450"  >
 <g className="countries" >
   
 
@@ -1062,15 +1064,21 @@ return(
 
 </svg>
 
-<div  class="tooltipdisp" style={tooltipStyle}>
-{pointedLocation}
 
-<br></br>
+
+	
+
+<table class="tooltipdisp" style={tooltipStyle}>
+	
+	<p>   {pointedLocation} </p>  
+
 <p>total cases: {regionalCases}</p> 
 <p> suspected: </p> 
 		<p> confirmed: </p> 
+</table>
 
-</div>
+
+
 
       </div>
 
@@ -1082,8 +1090,8 @@ return(
 }
 
 })}
-  
  
+
 
   </div>
   
