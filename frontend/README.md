@@ -1,6 +1,6 @@
-# React SVG Maps Tutorial
+# MonkeyPox React SVG Maps 
 
-A basic example of a pure react SVG world map created with react, d3-geo and topojson-client.
+A MonkeyPox Case Tracker created with react, SVG world map, d3-geo and topojson-client.
 
 ## Getting started
 
