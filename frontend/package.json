@@ -1,14 +1,14 @@
 {
-  "name": "react-svg-maps-tutorial",
+  "name": "MonkeyPoxTracker",
   "version": "1.0.0",
-  "description": "A basic example of a pure react SVG world map created with react, d3-geo and topojson-client.",
+  "description": "A MonkeyPox Case Tracker created with react, SVG world map, d3-geo and topojson-client.",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "react-scripts start"
   },
-  "author": "Richard Zimerman <richard@zcreativelabs.com> (https://github.com/zimrick)",
+  "author": "Nathan Tamiru  (https://github.com/NathanTamiru)",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2",

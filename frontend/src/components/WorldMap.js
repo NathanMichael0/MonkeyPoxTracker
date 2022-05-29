@@ -1029,7 +1029,7 @@ return(
 							key={ `marker-${j}` }
 							cx={ projection(d.coordinates)[0] }
 							cy={ projection(d.coordinates)[1] }
-							r={ 5}
+							r={ 2}
 							fill="#E91E63"
 							stroke="#FFFFFF"
 							className="marker"
