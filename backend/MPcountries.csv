@@ -1,30 +1,35 @@
 COUNTA of Country,Status,,,
 Country,,confirmed,suspected,Grand Total
 ,0,,,0
-Argentina,,,1,1
+Argentina,,2,,2
 Australia,,2,,2
 Austria,,1,,1
 Belgium,,6,1,7
 Bolivia,,,1,1
-Canada,,26,34,60
+Canada,,26,37,63
 Czech Republic,,5,,5
 Denmark,,2,,2
-England,,85,,85
-Finland,,,1,1
+Ecuador,,,1,1
+England,,101,,101
+Finland,,1,,1
 France,,7,,7
-Germany,,12,1,13
+Germany,,21,1,22
+Iran,,,3,3
+Ireland,,1,1,2
 Israel,,1,1,2
-Italy,,9,2,11
+Italy,,12,1,13
+Malta,,,1,1
+Mexico,,1,,1
 Netherlands,,12,,12
 Northern Ireland,,1,,1
-Portugal,,58,,58
+Portugal,,74,,74
 Scotland,,3,,3
 Slovenia,,2,,2
-Spain,,84,55,139
+Spain,,106,33,139
 Sudan,,,1,1
 Sweden,,2,,2
-Switzerland,,3,,3
+Switzerland,,4,,4
 United Arab Emirates,,1,,1
-United States,,9,1,10
+United States,,9,4,13
 Wales,,1,,1
-Grand Total,0,332,99,431
+Grand Total,0,404,86,490

@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from "react"
 import { geoEqualEarth, geoPath } from "d3-geo"
 import { feature } from "topojson-client"
-import { getLocationName } from "./utils";
 import './WorldMap.css'
 import axios from "axios";
 
 
-const baseUrl = "http://192.168.0.10:5000";
+const baseUrl = "http://localhost:5000";
 
  let cities= [
   {
@@ -759,6 +758,8 @@ const WorldMap = () => {
   const [tooltipStyle, setToolTipStyle] = useState({display: "none"});
   const [countryLook, setCountryLook] = useState([{coordinates:[-1000,-1000]}]);
   const [regionalCases, setRegionalCases] = useState(0)
+  const [userLocation, setUserLocation] = useState("");
+  const [userRegionalCases, setUserRegionalCases] = useState(0)
 
   
 
@@ -786,16 +787,30 @@ const WorldMap = () => {
     try {
       console.log("trying to update");
       const data = await axios.get(`${baseUrl}/cases`);
+	  const res = await axios.get('https://geolocation-db.com/json/')
       
       let temp = data.data;
+	  
         
         cities = temp[0].slice();
 		countr = temp[1].slice();
 		//console.log("printtt", temp[0], "\n" , temp[1]);
 		
 		
-	
+		setUserLocation(res.data.country_name);
+
+	  for(let CountryCase of countr){
+		if(CountryCase["COUNTA of Country"] === res.data.country_name ){
+
+			setUserRegionalCases((!CountryCase.field5)? 0 : CountryCase.field5 );
+
+		break;
+		}
+		
+		}
         setLoad(1);
+
+	
 		console.log("here ",  countr)
     
     } catch (err) {
@@ -918,8 +933,8 @@ else{
 	console.log("mousemoveX", (posX),"mousemoveY", (posY))
     setToolTipStyle({
       display: "block",
-      top: (posY-165  ),
-      left:  ( posX- 35  )
+      top: (posY-125  ),
+      left:  ( posX  )
     });
     
   }
@@ -931,12 +946,13 @@ else{
   
   return (
 
-    <div >
+    <div id = "grad">
 	
 	 
-     <section>
+     <section id ="grad">
        <h1>World Monkey Pox cases</h1>
-	   <p> Total Cases world wide (Confirmed and suspected) : {countr[(countr.length) - 1]["field5"]}</p>
+	   <p id = "grad"> Total Cases world wide (Confirmed and suspected) : {countr[(countr.length) - 1]["field5"]}</p>
+	   <p id = "grad"> Total Cases in {userLocation} : {userRegionalCases} </p>
 
  
       
@@ -950,7 +966,7 @@ poxData.map((vl) => {
   {
 return(
 <div>
-<svg width={ 600 } height={ 400 } viewBox="0 0 800 450"  >
+<svg /**width={ 600 } height={ 400 }**/   viewBox="0 0 800 450"  >
 <g className="countries" >
   
 
@@ -1073,8 +1089,7 @@ return(
 	<p>   {pointedLocation} </p>  
 
 <p>total cases: {regionalCases}</p> 
-<p> suspected: </p> 
-		<p> confirmed: </p> 
+
 </table>
 
 
